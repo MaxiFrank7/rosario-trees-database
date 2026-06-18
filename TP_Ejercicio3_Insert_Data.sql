@@ -1,5 +1,8 @@
 -- 1. CARGA DE TABLAS CATÁLOGO / REFERENCIA
 
+USE TP_BDDI_FRANK_WINTER
+GO
+
 -- Especies (5 distintas)
 INSERT INTO Especie (NombreComun, NombreCientifico) VALUES 
 ('Jacarandá', 'Jacaranda mimosifolia'),
@@ -237,20 +240,17 @@ GO
 INSERT INTO Reclamos (mail, Fecha, FechaAsignacionTarea, idArbol, idMotivo, idTarea) VALUES
 ('juan@mail.com', '2025-11-01', '2025-11-02', 7, 1, 6), -- Resuelto
 ('pedro@mail.com', '2025-11-08', '2025-11-09', 8, 4, 7), -- Asignado pero Pendiente (Tarea 7 es NULL en FechaRealizado)
-('ana@mail.com', '2025-11-12', '2025-11-13', 18, 5, 8); -- Resuelto
-GO
--- Diciembre (No Asignados)
-INSERT INTO Reclamos (mail, Fecha, FechaAsignacionTarea, idArbol, idMotivo, idTarea) VALUES
-('admin@plaza.com', '2025-10-18', NULL, 41, 2, 4); -- No Asignado
+('ana@mail.com', '2025-11-12', '2025-11-13', 18, 5, 8) -- Resuelto
+('admin@plaza.com', '2025-10-18', NULL, 41, 2, 4) -- No Asignado
 ('luz@mail.com', '2025-11-18', NULL, 42, 2, 9), -- No Asignado
 ('admin@club.com', '2025-11-20', NULL, 9, 3, 10), -- No Asignado
 ('admin@club.com', '2025-11-26', NULL, 10, 1, 11), -- No Asignado
-('vecinoX@mail.com', '2025-12-01', NULL, 11, 1, 12), -- No Asignado
-('vecinoY@mail.com', '2025-12-02', NULL, 12, 1, 13), -- No Asignado
-('vecinoZ@mail.com', '2025-12-05', NULL, 19, 3, 14), -- No Asignado
-('queja@barrio.com', '2025-12-10', NULL, 25, 3, NULL), -- No Asignado
-('queja@barrio.com', '2025-12-12', NULL, 26, 3, NULL), -- No Asignado
-('alerta@ciudad.com', '2025-12-15', NULL, 27, 2, NULL), -- No Asignado
-('alerta@ciudad.com', '2025-12-20', NULL, 28, 2, NULL), -- No Asignado
-('info@vecinos.com', '2025-12-22', NULL, 29, 1, NULL); -- No Asignado
+('vecinoX@mail.com', '2025-11-01', NULL, 11, 1, 12), -- No Asignado
+('vecinoY@mail.com', '2025-11-02', NULL, 12, 1, 13), -- No Asignado
+('vecinoZ@mail.com', '2025-11-05', NULL, 19, 3, 14), -- No Asignado
+('queja@barrio.com', '2025-11-10', NULL, 25, 3, NULL), -- No Asignado
+('queja@barrio.com', '2025-11-12', NULL, 26, 3, NULL), -- No Asignado
+('alerta@ciudad.com', '2025-11-15', NULL, 27, 2, NULL), -- No Asignado
+('alerta@ciudad.com', '2025-11-20', NULL, 28, 2, NULL), -- No Asignado
+('info@vecinos.com', '2025-11-22', NULL, 29, 1, NULL); -- No Asignado; 
 GO
