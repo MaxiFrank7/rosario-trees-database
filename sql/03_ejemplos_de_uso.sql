@@ -1,8 +1,8 @@
-USE TP_BBDD_G10
+ÔªøUSE TP_BBDD_G10
 GO
 --4. Escribir sentencias SQL que permitan resolver los siguientes casos de negocio:
 
---a. Mostrar la cuadrilla que m·s tareas realizÛ en el mes de Octubre de 2025, y la cantidad de tareas realizadas.
+--a. Mostrar la cuadrilla que m√°s tareas realiz√≥ en el mes de Octubre de 2025, y la cantidad de tareas realizadas.
 SELECT TOP 1 Cu.Codigo AS CodigoCuadrilla, COUNT(idTarea) AS CantTareasRealizadas
 FROM Cuadrilla Cu
 JOIN Tarea T ON Cu.idCuadrilla=T.idCuadrilla
@@ -10,7 +10,7 @@ WHERE FechaRealizado<'2025-11-01' AND FechaRealizado>='2025-10-01'
 GROUP BY Cu.Codigo
 ORDER BY CantTareasRealizadas DESC;
 GO
---b. Mostrar los Motivos de Reclamos que tengan m·s de 3 reclamos en estado no asignado (sin tarea).
+--b. Mostrar los Motivos de Reclamos que tengan m√°s de 3 reclamos en estado no asignado (sin tarea).
 SELECT TOP 3 M.Descripcion, COUNT(R.idReclamo) AS CantReclamos
 FROM Reclamos R
 JOIN MotivoReclamo M ON M.idMotivoReclamo=R.idMotivo
@@ -19,7 +19,7 @@ GROUP BY M.Descripcion
 HAVING COUNT(R.idReclamo)>3
 ORDER BY CantReclamos DESC
 GO
---c. Mostrar los ¡rboles (cÛdigo, especie y ubicaciÛn) que no tengan ning˙n reclamo.
+--c. Mostrar los √Årboles (c√≥digo, especie y ubicaci√≥n) que no tengan ning√∫n reclamo.
 SELECT A.Codigo, E.NombreComun, U.Plaza, C.Nombre, U.Altura
 FROM Arbol A
 JOIN Especie E ON E.idEspecie=A.idEspecie
@@ -28,7 +28,7 @@ LEFT JOIN Calles C ON U.idCalle=C.idCalle
 LEFT JOIN Reclamos R ON R.idArbol=A.idArbol
 WHERE R.idReclamo IS NULL
 GO
---d. Mostrar los tres ·rboles (cÛdigo y altura) m·s altos de cada especie. Mostrar los resultados ordenados por especie y luego altura decreciente.
+--d. Mostrar los tres √°rboles (c√≥digo y altura) m√°s altos de cada especie. Mostrar los resultados ordenados por especie y luego altura decreciente.
 SELECT RA.Codigo, RA.NombreComun, RA.Altura
 FROM( SELECT A.Codigo, E.NombreComun, M.Altura,
 	ROW_NUMBER() OVER(partition by E.NombreComun ORDER by  E.NombreComun, M.Altura DESC) AS Ranking
@@ -60,22 +60,22 @@ EXEC @CantidadTareas = sp_AnalizarTareasArbol
 -- Mostrar resultados
 SELECT 
     'Caso Encontrado' AS Escenario,
-    @FechaSalida AS [Fecha PrÛxima Tarea],
+    @FechaSalida AS [Fecha Pr√≥xima Tarea],
     @CantidadTareas AS [Tareas Pendientes];
 GO
 
 --Caso 2 No encontradoDECLARE @FechaSalida2 DATE;
 DECLARE @CantidadRetorno2 INT;
 
--- EjecuciÛn
+-- Ejecuci√≥n
 EXEC @CantidadRetorno2 = sp_AnalizarTareasArbol 
-    @idArbol = 1,                -- ID de un ·rbol sin tareas o inexistente
+    @idArbol = 1,                -- ID de un √°rbol sin tareas o inexistente
     @idTipoTarea = 1,
     @FechaProxima = @FechaSalida2 OUTPUT;
 
 -- Mostrar resultados
 SELECT 
     'Caso NO Encontrado' AS Escenario,
-    @FechaSalida2 AS [Fecha PrÛxima Tarea], -- DeberÌa ser NULL
-    @CantidadRetorno2 AS [Cantidad Pendientes]; -- DeberÌa ser 0
+    @FechaSalida2 AS [Fecha Pr√≥xima Tarea], -- Deber√≠a ser NULL
+    @CantidadRetorno2 AS [Cantidad Pendientes]; -- Deber√≠a ser 0
 GO

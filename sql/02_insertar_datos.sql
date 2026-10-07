@@ -1,12 +1,12 @@
-USE TP_BBDD_G10
+ï»¿USE TP_BBDD_G10
 GO
--- 1. CARGA DE TABLAS CATÁLOGO / REFERENCIA
+-- 1. CARGA DE TABLAS CATÃLOGO / REFERENCIA
 
 --Especies
 INSERT INTO Especie (NombreComun, NombreCientifico) VALUES 
-('Jacarandá', 'Jacaranda mimosifolia'),
+('JacarandÃ¡', 'Jacaranda mimosifolia'),
 ('Tilo', 'Tilia platyphyllos'),
-('Plátano', 'Platanus x hispanica'),
+('PlÃ¡tano', 'Platanus x hispanica'),
 ('Ceibo', 'Erythrina crista-galli'),
 ('Fresno Americano', 'Fraxinus pennsylvanica');
 GO
@@ -17,42 +17,42 @@ INSERT INTO Salud (Estado) VALUES
 ('Enfermo - Leve'),
 ('Enfermo - Grave'),
 ('Seco / Muerto'),
-('En Riesgo de Caída');
+('En Riesgo de CaÃ­da');
 GO
 
 -- Tipos de Tarea
 INSERT INTO TipoTarea (Descripcion) VALUES 
 ('Poda Correctiva'),
 ('Poda de Despeje'),
-('Extracción'),
+('ExtracciÃ³n'),
 ('Plantado'),
 ('Censado / Relevamiento');
 GO
 
 -- Motivos de Reclamo
 INSERT INTO MotivoReclamo (Descripcion) VALUES 
-('Rama caída obstruyendo paso'),
-('Árbol seco'),
-('Raíces levantando vereda'),
-('Obstrucción de luminaria'),
-('Árbol inclinado / Riesgo caída');
+('Rama caÃ­da obstruyendo paso'),
+('Ãrbol seco'),
+('RaÃ­ces levantando vereda'),
+('ObstrucciÃ³n de luminaria'),
+('Ãrbol inclinado / Riesgo caÃ­da');
 GO
 
 -- Calles (Nueva Tabla)
 INSERT INTO Calles (Nombre) VALUES 
-('Bv. Oroño'),
+('Bv. OroÃ±o'),
 ('Av. Pellegrini'),
-('Calle Córdoba'),
+('Calle CÃ³rdoba'),
 ('Calle Rioja'),
 ('Calle Santa Fe'),
 ('Bv. 27 de Febrero');
 GO
 
 -- Ubicaciones
--- Nota: idCalle 1='Oroño', 2='Pellegrini', 3='Córdoba', 4='Rioja', 5='Santa Fe', 6='27 de Febrero'
+-- Nota: idCalle 1='OroÃ±o', 2='Pellegrini', 3='CÃ³rdoba', 4='Rioja', 5='Santa Fe', 6='27 de Febrero'
 INSERT INTO Ubicacion (Plaza, idCalle, Altura, Coordenadas) VALUES 
-('Plaza San Martín', NULL, NULL, '-32.947, -60.643'),
-('Parque España', NULL, NULL, '-32.936, -60.636'),
+('Plaza San MartÃ­n', NULL, NULL, '-32.947, -60.643'),
+('Parque EspaÃ±a', NULL, NULL, '-32.936, -60.636'),
 (NULL, 1, '1200', '-32.952, -60.655'),
 (NULL, 2, '1500', '-32.956, -60.645'),
 (NULL, 3, '850', '-32.946, -60.638'),
@@ -60,7 +60,7 @@ INSERT INTO Ubicacion (Plaza, idCalle, Altura, Coordenadas) VALUES
 (NULL, 4, '2000', '-32.948, -60.650'),
 (NULL, 5, '1100', '-32.945, -60.640'),
 (NULL, 6, '500', '-32.970, -60.630'),
-('Plaza López', NULL, NULL, '-32.958, -60.639');
+('Plaza LÃ³pez', NULL, NULL, '-32.958, -60.639');
 GO
 
 -- 2. CARGA DE ENTIDADES PRINCIPALES
@@ -85,7 +85,7 @@ INSERT INTO Empleados (Nombre, Apellido, CUIL, Telefono, FechaIngreso, idCuadril
 GO
 
 -- 3. CARGA DE MEDICIONES
--- Insertamos mediciones para luego asignarlas a los árboles.
+-- Insertamos mediciones para luego asignarlas a los Ã¡rboles.
 INSERT INTO Mediciones (FechaMedicion, Altura, idSalud) VALUES
 ('2024-01-10', 12.5, 1), ('2024-01-12', 10.0, 1), ('2024-01-15', 8.5, 1), ('2024-01-18', 15.2, 1),
 ('2024-02-01', 9.0, 1),  ('2024-02-05', 11.5, 1), ('2024-02-10', 13.0, 1), ('2024-02-15', 7.5, 1),
@@ -94,7 +94,7 @@ INSERT INTO Mediciones (FechaMedicion, Altura, idSalud) VALUES
 ('2024-04-01', 8.0, 3),  ('2024-04-05', 7.5, 3), ('2024-04-10', 13.5, 3),
 ('2024-04-15', 18.0, 5), ('2024-04-20', 19.5, 5), ('2024-04-25', 5.5, 4), 
 ('2024-05-01', 4.0, 4),  ('2024-05-05', 10.0, 5);
--- Generamos algunas más para completar 40 mediciones
+-- Generamos algunas mÃ¡s para completar 40 mediciones
 INSERT INTO Mediciones (FechaMedicion, Altura, idSalud)
 SELECT DATEADD(day, number, '2024-06-01'), (number * 0.5) + 3, 1
 FROM master..spt_values WHERE type = 'P' AND number BETWEEN 1 AND 18;
@@ -119,7 +119,7 @@ INSERT INTO Arbol (Codigo, FechaPlantado, idEspecie, idUbicacion, idMedicion) VA
 ('ARB-033', NULL, 3, 4, 33), ('ARB-034', NULL, 4, 5, 34), ('ARB-035', NULL, 5, 6, 35), ('ARB-036', NULL, 1, 7, 36),
 ('ARB-037', NULL, 2, 8, 37), ('ARB-038', NULL, 3, 9, 38), ('ARB-039', NULL, 4, 10, 39),('ARB-040', NULL, 5, 1, 40);
 
--- Bloque 3: Árboles recientes SIN MEDICIÓN (idMedicion NULL)
+-- Bloque 3: Ãrboles recientes SIN MEDICIÃ“N (idMedicion NULL)
 INSERT INTO Arbol (Codigo, FechaPlantado, idEspecie, idUbicacion, idMedicion) VALUES
 ('ARB-041', '2024-01-10', 1, 3, NULL), ('ARB-042', '2024-02-15', 2, 4, NULL), ('ARB-043', '2024-03-20', 3, 5, NULL),
 ('ARB-044', '2024-04-25', 4, 6, NULL), ('ARB-045', '2024-05-30', 5, 7, NULL), ('ARB-046', '2024-06-05', 1, 8, NULL),
@@ -129,21 +129,21 @@ GO
 
 
 -- 5. CARGA DE TAREAS (Transaccional)
--- Requisito c: 20 tareas distribuidas en 3 meses o más (Oct 2025, Nov 2025, Dic 2025).
+-- Requisito c: 20 tareas distribuidas en 3 meses o mÃ¡s (Oct 2025, Nov 2025, Dic 2025).
 GO
 -- Octubre 2025 (Tareas Realizadas)
 INSERT INTO Tarea (FechaEstimada, FechaRealizado, Comentario, idTipoTarea, idCuadrilla) VALUES
-('2025-10-05', '2025-10-05', 'Poda realizada con éxito', 1, 2),
-('2025-10-10', '2025-10-11', 'Extracción de ejemplar seco', 3, 2),
+('2025-10-05', '2025-10-05', 'Poda realizada con Ã©xito', 1, 2),
+('2025-10-10', '2025-10-11', 'ExtracciÃ³n de ejemplar seco', 3, 2),
 ('2025-10-15', '2025-10-15', 'Despeje de luminaria', 2, 1),
-('2025-10-20', '2025-10-20', 'Plantado de reposición', 4, 3),
+('2025-10-20', '2025-10-20', 'Plantado de reposiciÃ³n', 4, 3),
 ('2025-10-25', '2025-10-26', 'Censado de la cuadra', 5, 2);
 
 -- Noviembre 2025
 INSERT INTO Tarea (FechaEstimada, FechaRealizado, Comentario, idTipoTarea, idCuadrilla) VALUES
 ('2025-11-05', '2025-11-05', 'Poda de altura', 1, 1),
 ('2025-11-10', NULL, 'Pendiente por lluvia', 2, 2),
-('2025-11-15', '2025-11-15', 'Extracción programada', 3, 3),
+('2025-11-15', '2025-11-15', 'ExtracciÃ³n programada', 3, 3),
 ('2025-11-20', NULL, 'Falta insumos', 4, 1),
 ('2025-11-25', '2025-11-25', 'Relevamiento estado salud', 5, 2),
 ('2025-11-28', '2025-11-29', 'Poda correctiva', 1, 3);
@@ -160,12 +160,12 @@ INSERT INTO Tarea (FechaEstimada, FechaRealizado, Comentario, idTipoTarea, idCua
 ('2025-12-28', NULL, 'Planificado', 1, 2),
 ('2025-12-30', NULL, 'Planificado', 3, 3);
 GO
--- Asignación Tarea - Arbol (Muchos a Muchos)
--- Requisito: Tareas asociadas a uno o más árboles.
+-- AsignaciÃ³n Tarea - Arbol (Muchos a Muchos)
+-- Requisito: Tareas asociadas a uno o mÃ¡s Ã¡rboles.
 INSERT INTO TareaArbol (idTarea, idArbol) VALUES
 (1, 1), -- Tarea 1 -> Arbol 1
 (2, 20), -- Tarea 2 -> Arbol 20 (Seco)
-(3, 2), (3, 3), -- Tarea 3 -> Arbol 2 y 3 (Varios árboles en una tarea)
+(3, 2), (3, 3), -- Tarea 3 -> Arbol 2 y 3 (Varios Ã¡rboles en una tarea)
 (4, 41),
 (5, 4), (5, 5), (5, 6), -- Censado masivo
 (6, 7),

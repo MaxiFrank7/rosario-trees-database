@@ -1,9 +1,9 @@
-CREATE DATABASE TP_BBDD_G10
+ï»¿CREATE DATABASE TP_BBDD_G10
 GO
 USE TP_BBDD_G10
 GO
 --CREACION DE TODAS LAS TABLAS
--- 1. Tablas Catálogo / Referencia
+-- 1. Tablas CatÃ¡logo / Referencia
 CREATE TABLE Especie (
     idEspecie INT IDENTITY(1,1) NOT NULL,
     NombreComun VARCHAR(100) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE Cuadrilla (
 );
 GO
 
--- 2. Entidades con dependencia de tablas Catálogos
+-- 2. Entidades con dependencia de tablas CatÃ¡logos
 CREATE TABLE Mediciones (
     idMedicion INT IDENTITY(1,1) NOT NULL,
     FechaMedicion DATE NULL, 
@@ -133,7 +133,7 @@ CREATE TABLE Reclamos (
 );
 GO
 
--- RESTRICCIONES UNIQUE (Para evitar datos duplicados lógicamente)
+-- RESTRICCIONES UNIQUE (Para evitar datos duplicados lÃ³gicamente)
 ALTER TABLE Cuadrilla ADD CONSTRAINT UQ_Cuadrilla_Codigo UNIQUE (Codigo);
 ALTER TABLE Arbol ADD CONSTRAINT UQ_Arbol_Codigo UNIQUE (Codigo);
 ALTER TABLE Empleados ADD CONSTRAINT UQ_Empleados_CUIL UNIQUE (CUIL);
@@ -144,10 +144,10 @@ ALTER TABLE MotivoReclamo ADD CONSTRAINT UQ_Motivo_Descripcion UNIQUE (Descripci
 ALTER TABLE Calles ADD CONSTRAINT UQ_Calles_Nombre UNIQUE (Nombre);
 GO
 
-/*5. Escriba las siguientes vistas. Proporcione dos ejemplos de ejecución usando cada una de ellas:
-a. Mostrar información de los reclamos. Se desea saber la fecha de cada uno,
-el código del árbol asociado al reclamo, la cantidad de días que se tardó en
-asignar la tarea y la cantidad de días que se tardó en resolver el mismo. Sino tiene tarea asignada o no fue resuelto calcular los días hasta la fechaactual.*/
+/*5. Escriba las siguientes vistas. Proporcione dos ejemplos de ejecuciÃ³n usando cada una de ellas:
+a. Mostrar informaciÃ³n de los reclamos. Se desea saber la fecha de cada uno,
+el cÃ³digo del Ã¡rbol asociado al reclamo, la cantidad de dÃ­as que se tardÃ³ en
+asignar la tarea y la cantidad de dÃ­as que se tardÃ³ en resolver el mismo. Sino tiene tarea asignada o no fue resuelto calcular los dÃ­as hasta la fechaactual.*/
 CREATE VIEW v_InfoReclamos AS
 	SELECT R.Fecha, A.Codigo, 
 		DATEDIFF(DAY, R.Fecha, ISNULL(T.FechaRealizado, GETDATE())) AS [Tiempo de Resolucion], 
@@ -156,8 +156,8 @@ CREATE VIEW v_InfoReclamos AS
 	JOIN Arbol A ON A.idArbol=R.idArbol
 	LEFT JOIN Tarea T ON T.idtarea=R.idTarea
 GO
-/*b. Resumen de tareas ya realizadas según su tipo. Se desea saber la fecha de
-la primer y última tarea de cada tipo y la cantidad de tareas realizadas*/
+/*b. Resumen de tareas ya realizadas segÃºn su tipo. Se desea saber la fecha de
+la primer y Ãºltima tarea de cada tipo y la cantidad de tareas realizadas*/
 CREATE VIEW v_TareasRealizadas AS
 	SELECT TT.Descripcion, 
 		MIN(T.FechaRealizado) AS [Primera Fecha Realizada], 
@@ -170,12 +170,12 @@ CREATE VIEW v_TareasRealizadas AS
 GO
 
 /*6. Escriba un procedimiento almacenado para identificar si existen tareas no realizadas
-dado un árbol en particular y un tipo de tareas. El procedimiento debe devolver:
-a. Como parámetro de salida, la fecha de la próxima tarea del tipo indicado a
-realizarse sobre el árbol, si existiera.
+dado un Ã¡rbol en particular y un tipo de tareas. El procedimiento debe devolver:
+a. Como parÃ¡metro de salida, la fecha de la prÃ³xima tarea del tipo indicado a
+realizarse sobre el Ã¡rbol, si existiera.
 b. Debe retornar (como valor de retorno) la cantidad de tareas pendientes de
-realizar para el tipo de tarea y árbol proporcionados.
-Incluya dos ejemplos de ejecución del procedimiento (encontrando y no encontrandotareas) y muestre los valores devueltos en cada caso.*/
+realizar para el tipo de tarea y Ã¡rbol proporcionados.
+Incluya dos ejemplos de ejecuciÃ³n del procedimiento (encontrando y no encontrandotareas) y muestre los valores devueltos en cada caso.*/
 
 CREATE OR ALTER PROCEDURE sp_AnalizarTareasArbol
 	@idArbol INT,
