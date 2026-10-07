@@ -147,7 +147,8 @@ GO
 /*5. Escriba las siguientes vistas. Proporcione dos ejemplos de ejecución usando cada una de ellas:
 a. Mostrar información de los reclamos. Se desea saber la fecha de cada uno,
 el código del árbol asociado al reclamo, la cantidad de días que se tardó en
-asignar la tarea y la cantidad de días que se tardó en resolver el mismo. Sino tiene tarea asignada o no fue resuelto calcular los días hasta la fechaactual.*/
+asignar la tarea y la cantidad de días que se tardó en resolver el mismo. Sino tiene tarea asignada o no fue resuelto calcular los días hasta la fecha
+actual.*/
 CREATE VIEW v_InfoReclamos AS
 	SELECT R.Fecha, A.Codigo, 
 		DATEDIFF(DAY, R.Fecha, ISNULL(T.FechaRealizado, GETDATE())) AS [Tiempo de Resolucion], 
@@ -175,7 +176,8 @@ a. Como parámetro de salida, la fecha de la próxima tarea del tipo indicado a
 realizarse sobre el árbol, si existiera.
 b. Debe retornar (como valor de retorno) la cantidad de tareas pendientes de
 realizar para el tipo de tarea y árbol proporcionados.
-Incluya dos ejemplos de ejecución del procedimiento (encontrando y no encontrandotareas) y muestre los valores devueltos en cada caso.*/
+Incluya dos ejemplos de ejecución del procedimiento (encontrando y no encontrando
+tareas) y muestre los valores devueltos en cada caso.*/
 
 CREATE OR ALTER PROCEDURE sp_AnalizarTareasArbol
 	@idArbol INT,

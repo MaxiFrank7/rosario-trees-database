@@ -64,7 +64,8 @@ SELECT
     @CantidadTareas AS [Tareas Pendientes];
 GO
 
---Caso 2 No encontradoDECLARE @FechaSalida2 DATE;
+--Caso 2 No encontrado
+DECLARE @FechaSalida2 DATE;
 DECLARE @CantidadRetorno2 INT;
 
 -- Ejecución
